@@ -17,17 +17,17 @@ interface AccountRepository {
 }
 
 @Repository
-class AccountRepositoryImpl(private val dslContext: DSLContext) : AccountRepository {
-    override fun findAll(): List<Account> {
-        return dslContext.select()
-            .from(Accounts.ACCOUNTS)
-            .fetch()
-            .into(Account::class.java)
-    }
+        class AccountRepositoryImpl(private val dslContext: DSLContext) : AccountRepository {
+            override fun findAll(): List<Account> {
+                return dslContext.select()
+                    .from(Accounts.ACCOUNTS)
+                    .fetch()
+                    .into(Account::class.java)
+            }
 
-    override fun findById(id: Long): Account? {
-        return dslContext
-            .fetchOne(Accounts.ACCOUNTS, Accounts.ACCOUNTS.ID.eq(id))
+            override fun findById(id: Long): Account? {
+                return dslContext
+                    .fetchOne(Accounts.ACCOUNTS, Accounts.ACCOUNTS.ID.eq(id))
             ?.into(Account::class.java)
     }
 
